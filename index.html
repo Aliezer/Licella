@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feliz Aniversario, Mi Amor ❤️</title>
+  <style>
+    :root {
+      --primary-color: #ff4b72;
+      --secondary-color: #ff8fa3;
+      --bg-color: #fff0f3;
+      --card-bg: #ffffff;
+      --text-color: #2b2d42;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fondo con corazones flotantes */
+    .heart-bg {
+      position: fixed;
+      top: -10vh;
+      font-size: 1.5rem;
+      color: rgba(255, 75, 114, 0.4);
+      animation: floatUp 8s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(105vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Tarjeta principal */
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 650px;
+      width: 90%;
+      background: var(--card-bg);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(255, 75, 114, 0.15);
+      text-align: center;
+      margin: 2rem 0;
+      border: 2px solid #ffe5ec;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    /* Contador de tiempo */
+    .counter-box {
+      background: #fff5f7;
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      border: 1px dashed var(--secondary-color);
+    }
+
+    .counter-title {
+      font-size: 0.95rem;
+      color: var(--primary-color);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+
+    .timer {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    .timer-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .label {
+      font-size: 0.8rem;
+      color: #6c757d;
+    }
+
+    /* Carta de amor */
+    .letter-container {
+      text-align: left;
+      line-height: 1.8;
+      color: #4a4e69;
+      font-size: 1.05rem;
+      margin: 2rem 0;
+      background: #fafafa;
+      padding: 1.5rem;
+      border-left: 4px solid var(--primary-color);
+      border-radius: 4px;
+    }
+
+    /* Botón interactivo */
+    .btn-surprise {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 75, 114, 0.3);
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .btn-surprise:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 75, 114, 0.4);
+    }
+
+    /* Mensaje sorpresa oculto */
+    .hidden-message {
+      display: none;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 10px;
+      font-weight: 500;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animación de fondo -->
+  <div id="heart-container"></div>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <h1>Feliz Aniversario, Mi Amor ❤️</h1>
+    <p class="subtitle">Un pequeño espacio digital pensado y construido solo para ti.</p>
+
+    <!-- Contador (Cambia la fecha abajo en el script) -->
+    <div class="counter-box">
+      <div class="counter-title">Construyendo recuerdos juntos desde hace:</div>
+      <div class="timer">
+        <div class="timer-item"><span id="days" class="number">0</span><span class="label">Días</span></div>
+        <div class="timer-item"><span id="hours" class="number">0</span><span class="label">Horas</span></div>
+        <div class="timer-item"><span id="minutes" class="number">0</span><span class="label">Min.</span></div>
+        <div class="timer-item"><span id="seconds" class="number">0</span><span class="label">Seg.</span></div>
+      </div>
+    </div>
+
+    <!-- Carta de amor editable -->
+    <div class="letter-container">
+      <p>Hola mi vida,</p><br>
+      <p>Hoy celebramos otro capítulo de nuestra historia juntos. No hay palabras suficientes para agradecerte por cada risa, cada abrazo y cada momento inolvidable a tu lado.</p><br>
+      <p>Creé este pequeño rincón en internet para recordar siempre que, sin importar la distancia ni el tiempo, mi lugar favorito en el mundo siempre será a tu lado.</p><br>
+      <p><strong>Gracias por ser mi persona favorita, mi apoyo y mi mejor compañía. ¡Te amo infinitamente!</strong></p>
+    </div>
+
+    <!-- Botón de interacción -->
+    <button class="btn-surprise" onclick="showSurprise()">Haz clic aquí 🎁</button>
+
+    <div id="surprise" class="hidden-message">
+      💖 Promesa de hoy y siempre: Seguir eligiéndote cada día de mi vida. 💖
+    </div>
+  </div>
+
+  <script>
+    // 1. CONFIGURA TU FECHA DE INICIO DE RELACIÓN AQUÍ (Año, Mes-1, Día)
+    // Nota: El mes va de 0 a 11 (0 es Enero, 1 es Febrero, etc.)
+    const startDate = new Date(2023, 0, 15); // Ejemplo: 15 de Enero de 2023
+
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes =
