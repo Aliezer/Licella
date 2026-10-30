@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Aniversario, Mi Amor ❤️</title>
+  <title>Nuestro Primer Año ❤️</title>
   <style>
     :root {
-      --primary-color: #ff4b72;
+      --primary-color: #e63956;
       --secondary-color: #ff8fa3;
-      --bg-color: #fff0f3;
+      --bg-color: #fff5f7;
       --card-bg: #ffffff;
       --text-color: #2b2d42;
     }
@@ -20,8 +20,8 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: linear-gradient(160deg, #fff5f7 0%, #ffe5ec 100%);
       color: var(--text-color);
       min-height: 100vh;
       display: flex;
@@ -31,24 +31,28 @@
       position: relative;
     }
 
-    /* Fondo con corazones flotantes */
-    .heart-bg {
+    /* Corazones que suben desde abajo */
+    .heart-float {
       position: fixed;
-      top: -10vh;
-      font-size: 1.5rem;
-      color: rgba(255, 75, 114, 0.4);
-      animation: floatUp 8s linear infinite;
-      z-index: 0;
+      bottom: -10vh;
+      font-size: 1.4rem;
+      color: rgba(230, 57, 86, 0.55);
+      animation: floatUp 7s ease-in forwards;
+      z-index: 1;
       pointer-events: none;
+      user-select: none;
     }
 
     @keyframes floatUp {
       0% {
-        transform: translateY(105vh) rotate(0deg);
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
         opacity: 1;
       }
       100% {
-        transform: translateY(-10vh) rotate(360deg);
+        transform: translateY(-115vh) scale(1.2) rotate(360deg);
         opacity: 0;
       }
     }
@@ -57,82 +61,106 @@
     .container {
       position: relative;
       z-index: 10;
-      max-width: 650px;
-      width: 90%;
+      max-width: 680px;
+      width: 92%;
       background: var(--card-bg);
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(255, 75, 114, 0.15);
+      padding: 3rem 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 20px 45px rgba(230, 57, 86, 0.18);
       text-align: center;
-      margin: 2rem 0;
+      margin: 3rem 0;
       border: 2px solid #ffe5ec;
+      animation: cardIn 1.2s ease;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro {
+      font-size: 0.95rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--secondary-color);
+      margin-bottom: 1rem;
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.6rem;
       color: var(--primary-color);
-      margin-bottom: 0.5rem;
-      font-family: Georgia, 'Times New Roman', serif;
+      margin-bottom: 0.4rem;
+      font-family: 'Georgia', serif;
+      line-height: 1.2;
     }
 
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #6c757d;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       font-style: italic;
     }
 
     /* Contador de tiempo */
     .counter-box {
       background: #fff5f7;
-      border-radius: 12px;
-      padding: 1.2rem;
-      margin: 1.5rem 0;
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      margin: 2rem 0;
       border: 1px dashed var(--secondary-color);
     }
 
     .counter-title {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--primary-color);
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
     }
 
     .timer {
       display: flex;
       justify-content: center;
-      gap: 1.2rem;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
     .timer-item {
       display: flex;
       flex-direction: column;
+      min-width: 60px;
     }
 
     .number {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       font-weight: bold;
       color: var(--primary-color);
+      font-family: 'Segoe UI', sans-serif;
     }
 
     .label {
       font-size: 0.8rem;
       color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     /* Carta de amor */
     .letter-container {
       text-align: left;
-      line-height: 1.8;
+      line-height: 1.9;
       color: #4a4e69;
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       margin: 2rem 0;
-      background: #fafafa;
-      padding: 1.5rem;
+      background: #fffafc;
+      padding: 1.8rem;
       border-left: 4px solid var(--primary-color);
-      border-radius: 4px;
+      border-radius: 6px;
+    }
+
+    .letter-container p {
+      margin-bottom: 1rem;
     }
 
     /* Botón interactivo */
@@ -140,49 +168,72 @@
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       border: none;
-      padding: 0.8rem 1.8rem;
-      font-size: 1rem;
-      border-radius: 25px;
+      padding: 0.9rem 2.2rem;
+      font-size: 1.05rem;
+      border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 75, 114, 0.3);
+      box-shadow: 0 6px 20px rgba(230, 57, 86, 0.35);
       transition: all 0.3s ease;
       margin-top: 1rem;
+      font-family: inherit;
     }
 
     .btn-surprise:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 75, 114, 0.4);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(230, 57, 86, 0.5);
     }
 
     /* Mensaje sorpresa oculto */
     .hidden-message {
       display: none;
       margin-top: 1.5rem;
-      padding: 1rem;
-      background: #e8f5e9;
-      color: #2e7d32;
-      border-radius: 10px;
+      padding: 1.2rem;
+      background: #fff0f3;
+      color: var(--primary-color);
+      border-radius: 12px;
       font-weight: 500;
-      animation: fadeIn 0.5s ease;
+      font-style: italic;
+      animation: fadeIn 0.6s ease;
+      border: 1px solid #ffe5ec;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Corazón que late */
+    .pulse-heart {
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .container { padding: 2rem 1.4rem; }
+      .number { font-size: 1.7rem; }
+      .timer { gap: 1rem; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Animación de fondo -->
+  <!-- Contenedor para corazones animados -->
   <div id="heart-container"></div>
 
   <!-- Contenido principal -->
   <div class="container">
-    <h1>Feliz Aniversario, Mi Amor ❤️</h1>
-    <p class="subtitle">Un pequeño espacio digital pensado y construido solo para ti.</p>
+    <p class="intro">Desde el 31 de octubre de 2025</p>
+    <h1>Nuestro Primer Año <span class="pulse-heart">❤️</span></h1>
+    <p class="subtitle">Un pequeño rincón del mundo hecho solo para ti.</p>
 
-    <!-- Contador (Cambia la fecha abajo en el script) -->
+    <!-- Contador -->
     <div class="counter-box">
       <div class="counter-title">Construyendo recuerdos juntos desde hace:</div>
       <div class="timer">
@@ -193,31 +244,84 @@
       </div>
     </div>
 
-    <!-- Carta de amor editable -->
+    <!-- Carta de amor -->
     <div class="letter-container">
-      <p>Hola mi vida,</p><br>
-      <p>Hoy celebramos otro capítulo de nuestra historia juntos. No hay palabras suficientes para agradecerte por cada risa, cada abrazo y cada momento inolvidable a tu lado.</p><br>
-      <p>Creé este pequeño rincón en internet para recordar siempre que, sin importar la distancia ni el tiempo, mi lugar favorito en el mundo siempre será a tu lado.</p><br>
-      <p><strong>Gracias por ser mi persona favorita, mi apoyo y mi mejor compañía. ¡Te amo infinitamente!</strong></p>
+      <p>Mi amor,</p>
+      <p>Hoy se cumple un año desde aquel 31 de octubre en el que, sin saberlo, empezamos a escribir la historia más bonita de mi vida. No fue un día cualquiera: fue el día en que mi mundo cambió de color para siempre.</p>
+      <p>Un año de risas que se quedan, de abrazos que curan, de mañanas contigo y de noches en las que hasta el silencio suena a nosotros. Un año en el que aprendí que el amor no se trata de grandes gestos, sino de esos pequeños momentos que se repiten y que nunca quiero que terminen.</p>
+      <p>Gracias por ser mi calma en los días difíciles, mi alegría en los días grises y mi persona favorita en todos los días. Gracias por elegirme, por quedarte y por hacer que hasta lo cotidiano se sienta como un regalo.</p>
+      <p><strong>Si pudiera volver a empezar, te elegiría mil veces más. Y si me preguntas qué quiero para el futuro, la respuesta siempre serás tú. Te amo, hoy y siempre.</strong></p>
     </div>
 
     <!-- Botón de interacción -->
     <button class="btn-surprise" onclick="showSurprise()">Haz clic aquí 🎁</button>
 
     <div id="surprise" class="hidden-message">
-      💖 Promesa de hoy y siempre: Seguir eligiéndote cada día de mi vida. 💖
+      💖 Promesa de hoy y siempre: seguir eligiéndote cada día, con cada latido, por el resto de mis años. 💖
     </div>
   </div>
 
   <script>
-    // 1. CONFIGURA TU FECHA DE INICIO DE RELACIÓN AQUÍ (Año, Mes-1, Día)
-    // Nota: El mes va de 0 a 11 (0 es Enero, 1 es Febrero, etc.)
-    const startDate = new Date(2023, 0, 15); // Ejemplo: 15 de Enero de 2023
+    // 1. Fecha de inicio: 31 de octubre de 2025
+    // El mes en JS va de 0 a 11 → octubre = 9
+    const startDate = new Date(2025, 9, 31, 0, 0, 0);
 
     function updateCounter() {
       const now = new Date();
       const diff = now - startDate;
 
+      if (diff < 0) {
+        document.getElementById('days').innerText = 0;
+        document.getElementById('hours').innerText = 0;
+        document.getElementById('minutes').innerText = 0;
+        document.getElementById('seconds').innerText = 0;
+        return;
+      }
+
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes =
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    }
+
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    // 2. Corazones que salen desde abajo
+    const heartEmojis = ['❤️', '💖', '💕', '💗', '💓', '💞', '🌸'];
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart-float');
+      heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 1.4 + 1) + 'rem';
+      heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+
+      document.getElementById('heart-container').appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 9000);
+    }
+
+    // Lanza un corazón cada 500ms
+    setInterval(createHeart, 500);
+    // Y varios de golpe al inicio para que el efecto se note de inmediato
+    for (let i = 0; i < 8; i++) {
+      setTimeout(createHeart, i * 200);
+    }
+
+    // 3. Botón sorpresa
+    function showSurprise() {
+      const msg = document.getElementById('surprise');
+      msg.style.display = (msg.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>
