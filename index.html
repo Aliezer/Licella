@@ -22,6 +22,10 @@
       padding: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       font-family: 'Georgia', 'Times New Roman', serif;
       background: linear-gradient(160deg, #fff5f7 0%, #ffe5ec 40%, #ffd6e0 100%);
@@ -41,7 +45,6 @@
       cursor: pointer;
     }
     .gallery-img { cursor: zoom-in; }
-    .lightbox { cursor: zoom-out; }
 
     /* ===== Corazones que suben ===== */
     .heart-float {
@@ -345,7 +348,7 @@
       to   { opacity: 1; }
     }
 
-    /* ✅ Centrado con transform para que SIEMPRE abra arriba del contenido */
+    /* ✅ Modal centrado, siempre abre arriba */
     .gallery-content {
       background: #fffafc;
       position: absolute;
@@ -402,8 +405,6 @@
       transform: translateY(-2px) scale(1.05);
       box-shadow: 0 8px 20px rgba(230, 57, 86, 0.5);
     }
-
-    .gallery-back:active { transform: translateY(0) scale(0.97); }
 
     .gallery-close {
       position: absolute;
@@ -466,62 +467,73 @@
       position: fixed;
       z-index: 10001;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.9);
-      justify-content: center;
-      align-items: center;
+      background-color: rgba(0, 0, 0, 0.92);
+      /* ✅ Scroll dentro del lightbox */
+      overflow-y: auto;
+      overflow-x: hidden;
       animation: fadeIn 0.3s ease;
     }
 
-    .lightbox.show { display: flex; }
+    .lightbox.show {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 80px 20px 40px;
+    }
 
     .lightbox img {
       max-width: 92%;
-      max-height: 88vh;
+      max-height: 80vh;
       border-radius: 12px;
       box-shadow: 0 0 60px rgba(230, 57, 86, 0.5);
       animation: messageIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      flex-shrink: 0;
+      margin: auto;
     }
 
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: white;
-      font-size: 3rem;
-      font-weight: bold;
-      z-index: 10002;
-      transition: transform 0.2s;
-      line-height: 1;
-    }
-
-    .lightbox-close:hover { transform: scale(1.2); color: var(--secondary); }
-
-    /* ✅ Botón Volver en el lightbox */
+    /* ✅ Botones FIJOS por encima de la imagen */
     .lightbox-back {
-      position: absolute;
-      top: 24px;
-      left: 24px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(6px);
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      padding: 0.55rem 1.1rem;
+      border: none;
+      padding: 0.6rem 1.2rem;
       font-size: 0.95rem;
       border-radius: 25px;
       font-family: inherit;
-      font-weight: 500;
+      font-weight: 600;
       transition: all 0.3s ease;
-      z-index: 10002;
+      z-index: 10005;
       display: flex;
       align-items: center;
       gap: 0.35rem;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
     }
 
     .lightbox-back:hover {
-      background: var(--primary);
-      border-color: var(--primary);
       transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(230, 57, 86, 0.7);
     }
+
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2.8rem;
+      font-weight: bold;
+      z-index: 10005;
+      transition: transform 0.2s;
+      line-height: 1;
+      cursor: pointer;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    }
+
+    .lightbox-close:hover { transform: scale(1.2); color: var(--secondary); }
 
     /* ===== Responsive ===== */
     @media (max-width: 600px) {
@@ -552,13 +564,13 @@
         font-size: 2rem;
       }
       .lightbox-back {
-        top: 16px;
-        left: 16px;
+        top: 14px;
+        left: 14px;
         font-size: 0.85rem;
-        padding: 0.45rem 0.9rem;
+        padding: 0.5rem 1rem;
       }
       .lightbox-close {
-        top: 12px;
+        top: 14px;
         right: 18px;
         font-size: 2.5rem;
       }
@@ -589,13 +601,11 @@
     <!-- Carta -->
     <div class="letter-container">
       <p>Mi amor,</p>
-      <p>Hoy se cumple un año desde aquel 31 de octubre en el que, sin saberlo, empezamos a escribir nuestra historia
-         No fue un día cualquiera: fue el día en que mi mundo cambió de color para siempre.</p>
+      <p>Hoy se cumple un año desde aquel 31 de octubre en el que, sin saberlo, empezamos a escribir nuestra historia.
+        No fue un día cualquiera: fue el día en que mi mundo cambió de color para siempre.</p>
       <p>Un año de risas que se quedan, de abrazos que curan, de mañanas contigo y de noches en las que hasta el
         silencio suena a nosotros. Un año en el que aprendí que el amor no se trata de grandes gestos, sino de esos
         pequeños momentos que se repiten y que nunca quiero que terminen.</p>
-      <p>Gracias por ser mi calma en los días difíciles, mi alegría en los días grises y mi persona favorita en todos
-        los días. Gracias por elegirme, por quedarte y por hacer que hasta lo cotidiano se sienta como un regalo.</p>
     </div>
 
     <!-- Botones -->
@@ -615,44 +625,52 @@
     <!-- Modal de Galería -->
     <div id="galleryModal" class="gallery-modal">
       <div class="gallery-content">
-        <!-- ✅ Botón Volver (arriba izquierda) -->
         <button class="gallery-back" onclick="closeGallery()">← Volver</button>
-        <!-- X de cerrar (arriba derecha) -->
         <span class="gallery-close" onclick="closeGallery()">&times;</span>
 
         <!-- ===== Categoría 1 ===== -->
         <h3 class="gallery-category">Nuestra Primera Vez</h3>
         <div class="gallery-grid">
-          <img src="img/1.jpg" alt="Recuerdo 1" class="gallery-img"
+          <img src="img/1.png" alt="Recuerdo 1" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+1';">
-          <img src="img/2.jpg" alt="Recuerdo 2" class="gallery-img"
+          <img src="img/2.jpeg" alt="Recuerdo 2" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+2';">
-          <img src="img/3.jpg" alt="Recuerdo 3" class="gallery-img"
+          <img src="img/3.jpeg" alt="Recuerdo 3" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+3';">
         </div>
 
         <!-- ===== Categoría 2 ===== -->
         <h3 class="gallery-category">Momentos Juntos</h3>
         <div class="gallery-grid">
-          <img src="img/4.jpg" alt="Recuerdo 4" class="gallery-img"
+          <img src="img/4.jpeg" alt="Recuerdo 4" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+4';">
-          <img src="img/5.jpg" alt="Recuerdo 5" class="gallery-img"
+          <img src="img/5.jpeg" alt="Recuerdo 5" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+5';">
-          <img src="img/6.jpg" alt="Recuerdo 6" class="gallery-img"
+          <img src="img/6.jpeg" alt="Recuerdo 6" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+6';">
         </div>
 
         <!-- ===== Categoría 3 ===== -->
-        <h3 class="gallery-category">Nuestros Días Favoritos</h3>
+        <h3 class="gallery-category">Escobar que eso jajaja</h3>
         <div class="gallery-grid">
-          <img src="img/7.jpg" alt="Recuerdo 7" class="gallery-img"
+          <img src="img/7.jpeg" alt="Recuerdo 7" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+7';">
-          <img src="img/8.jpg" alt="Recuerdo 8" class="gallery-img"
+          <img src="img/8.jpeg" alt="Recuerdo 8" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+8';">
-          <img src="img/9.jpg" alt="Recuerdo 9" class="gallery-img"
+          <img src="img/9.jpeg" alt="Recuerdo 9" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+9';">
-          <img src="img/10.jpg" alt="Recuerdo 10" class="gallery-img"
+          <img src="img/10.jpeg" alt="Recuerdo 10" class="gallery-img"
                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+10';">
+                <img src="img/11.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/12.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/13.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/14.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/15.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/16.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/17.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/18.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/19.jpeg" alt="Recuerdo 4" class="gallery-img">
+                <img src="img/21.jpeg" alt="Recuerdo 4" class="gallery-img">
         </div>
 
       </div>
@@ -668,7 +686,7 @@
 
   <script>
     /* =====================================================
-       1. FECHA DE INICIO: 31 de octubre de 2025
+       1. FECHA DE INICIO
     ===================================================== */
     const startDate = new Date(2025, 9, 31, 0, 0, 0);
 
@@ -715,7 +733,7 @@
     updateCounter();
 
     /* =====================================================
-       2. CORAZONES QUE SUBEN DESDE ABAJO
+       2. CORAZONES
     ===================================================== */
     const heartEmojis = ['❤️', '💖', '💕', '💗', '💓', '💞', '🌸', '💘', '💝'];
 
@@ -734,7 +752,7 @@
     for (let i = 0; i < 10; i++) setTimeout(createHeart, i * 150);
 
     /* =====================================================
-       3. PÉTALOS QUE CAEN
+       3. PÉTALOS
     ===================================================== */
     const petals = ['🌸', '🌷', '🌹', '💮'];
     function createPetal() {
@@ -750,7 +768,7 @@
     setInterval(createPetal, 1500);
 
     /* =====================================================
-       4. CHISPAS AL HACER CLIC
+       4. CHISPAS
     ===================================================== */
     const clickSparks = ['💖', '✨', '💕', '⭐', '💗'];
 
@@ -773,7 +791,7 @@
     });
 
     /* =====================================================
-       5. BOTÓN SORPRESA
+       5. SORPRESA
     ===================================================== */
     function showSurprise() {
       const msg = document.getElementById('surprise');
@@ -814,7 +832,7 @@
     }
 
     /* =====================================================
-       7. FRASES ROTATIVAS
+       7. FRASES
     ===================================================== */
     const phrases = [
       'Eres mi lugar favorito en el mundo 🌍❤️',
@@ -843,14 +861,13 @@
     setInterval(rotatePhrase, 4000);
 
     /* =====================================================
-       8. GALERÍA DE RECUERDOS
+       8. GALERÍA
     ===================================================== */
     function openGallery() {
       const modal = document.getElementById('galleryModal');
       const content = modal.querySelector('.gallery-content');
       modal.style.display = 'block';
       document.body.style.overflow = 'hidden';
-      // ✅ Forzar scroll al inicio del álbum
       content.scrollTop = 0;
     }
 
@@ -859,7 +876,6 @@
       document.body.style.overflow = '';
     }
 
-    // Cerrar al hacer clic en el fondo oscuro del modal
     document.getElementById('galleryModal').addEventListener('click', function (e) {
       if (e.target === this) closeGallery();
     });
@@ -874,19 +890,18 @@
       if (e.target.classList.contains('gallery-img')) {
         lightboxImg.src = e.target.src;
         lightbox.classList.add('show');
+        lightbox.scrollTop = 0;   // ✅ abre arriba
         document.body.style.overflow = 'hidden';
       }
     });
 
     function closeLightbox() {
       lightbox.classList.remove('show');
-      document.body.style.overflow = 'hidden'; // sigue abierto el álbum detrás
+      // El álbum sigue detrás, no tocamos body.overflow
     }
 
-    // Cerrar con tecla ESC
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        // Si el lightbox está abierto, ciérralo primero
         if (lightbox.classList.contains('show')) {
           lightbox.classList.remove('show');
         } else {
