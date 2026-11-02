@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,11 @@
       --gold: #f4b942;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: 'Georgia', 'Times New Roman', serif;
@@ -28,10 +33,17 @@
       align-items: center;
       overflow-x: hidden;
       position: relative;
-      cursor: crosshair;
+      cursor: default;
     }
 
-    /* ===== Corazones que suben desde abajo ===== */
+    /* Cursores correctos */
+    button, .btn, a, .gallery-close, .lightbox-close, .gallery-back, .lightbox-back {
+      cursor: pointer;
+    }
+    .gallery-img { cursor: zoom-in; }
+    .lightbox { cursor: zoom-out; }
+
+    /* ===== Corazones que suben ===== */
     .heart-float {
       position: fixed;
       bottom: -12vh;
@@ -43,7 +55,7 @@
     }
 
     @keyframes floatUp {
-      0%   { transform: translateY(0) scale(0.6) rotate(0deg);   opacity: 0; }
+      0%   { transform: translateY(0) scale(0.6) rotate(0deg); opacity: 0; }
       10%  { opacity: 1; }
       50%  { transform: translateY(-55vh) scale(1) rotate(180deg); opacity: 1; }
       100% { transform: translateY(-120vh) scale(1.25) rotate(360deg); opacity: 0; }
@@ -133,7 +145,6 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== Corazón que late ===== */
     .pulse-heart {
       display: inline-block;
       animation: pulse 1.4s infinite;
@@ -188,9 +199,7 @@
       transition: transform 0.3s ease;
     }
 
-    .number.tick {
-      animation: tickPop 0.4s ease;
-    }
+    .number.tick { animation: tickPop 0.4s ease; }
 
     @keyframes tickPop {
       0%   { transform: scale(1); }
@@ -255,9 +264,7 @@
       box-shadow: 0 14px 30px rgba(230, 57, 86, 0.5);
     }
 
-    .btn-primary:active {
-      transform: translateY(-1px) scale(0.98);
-    }
+    .btn-primary:active { transform: translateY(-1px) scale(0.98); }
 
     .btn-secondary {
       background: white;
@@ -287,16 +294,14 @@
       box-shadow: 0 10px 30px rgba(230, 57, 86, 0.15);
     }
 
-    .hidden-message.show {
-      display: block;
-    }
+    .hidden-message.show { display: block; }
 
     @keyframes messageIn {
       from { opacity: 0; transform: translateY(20px) scale(0.95); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* ===== Frases cariñosas rotativas ===== */
+    /* ===== Frases cariñosas ===== */
     .love-phrase {
       margin-top: 1.5rem;
       font-size: 1.05rem;
@@ -309,7 +314,7 @@
 
     .love-phrase.fade-out { opacity: 0; }
 
-    /* ===== Corazón flotante grande al hacer clic ===== */
+    /* ===== Corazón flotante grande ===== */
     .big-heart {
       position: fixed;
       font-size: 8rem;
@@ -324,6 +329,200 @@
       100% { transform: translate(-50%, -150%) scale(0.8); opacity: 0; }
     }
 
+    /* ===== Modal de Galería ===== */
+    .gallery-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      inset: 0;
+      background-color: rgba(43, 45, 66, 0.85);
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ✅ Centrado con transform para que SIEMPRE abra arriba del contenido */
+    .gallery-content {
+      background: #fffafc;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 5rem 2rem 2rem;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 2px solid #ffe5ec;
+      animation: messageIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: default;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--secondary) #ffe5ec;
+    }
+
+    .gallery-content::-webkit-scrollbar { width: 10px; }
+    .gallery-content::-webkit-scrollbar-track {
+      background: #ffe5ec;
+      border-radius: 10px;
+    }
+    .gallery-content::-webkit-scrollbar-thumb {
+      background: var(--secondary);
+      border-radius: 10px;
+    }
+    .gallery-content::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    /* ✅ Botón Volver en el álbum */
+    .gallery-back {
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.95rem;
+      border-radius: 25px;
+      font-family: inherit;
+      font-weight: 500;
+      box-shadow: 0 4px 14px rgba(230, 57, 86, 0.35);
+      transition: all 0.3s ease;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .gallery-back:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(230, 57, 86, 0.5);
+    }
+
+    .gallery-back:active { transform: translateY(0) scale(0.97); }
+
+    .gallery-close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: var(--primary);
+      font-size: 2.5rem;
+      font-weight: bold;
+      transition: transform 0.2s;
+      line-height: 1;
+      z-index: 2;
+      background: rgba(255, 250, 252, 0.9);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-close:hover { transform: scale(1.2); }
+
+    .gallery-category {
+      color: var(--primary);
+      margin: 1.5rem 0 1rem;
+      font-size: 1.4rem;
+      text-align: left;
+      border-bottom: 2px dashed var(--secondary);
+      padding-bottom: 0.5rem;
+    }
+
+    .gallery-category:first-of-type { margin-top: 0; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid #ffe5ec;
+      background: #ffe5ec;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(230, 57, 86, 0.3);
+      border-color: var(--primary);
+    }
+
+    /* ===== Lightbox ===== */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 10001;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .lightbox.show { display: flex; }
+
+    .lightbox img {
+      max-width: 92%;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(230, 57, 86, 0.5);
+      animation: messageIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: white;
+      font-size: 3rem;
+      font-weight: bold;
+      z-index: 10002;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+
+    .lightbox-close:hover { transform: scale(1.2); color: var(--secondary); }
+
+    /* ✅ Botón Volver en el lightbox */
+    .lightbox-back {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 0.55rem 1.1rem;
+      font-size: 0.95rem;
+      border-radius: 25px;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      z-index: 10002;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .lightbox-back:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px) scale(1.05);
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 600px) {
       h1 { font-size: 2rem; }
@@ -331,9 +530,42 @@
       .number { font-size: 1.8rem; }
       .timer { gap: 1rem; }
       .btn { padding: 0.8rem 1.5rem; font-size: 0.95rem; }
+
+      .gallery-content {
+        width: 95%;
+        max-height: 92vh;
+        padding: 5rem 1.2rem 1.5rem;
+      }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+      .gallery-img { height: 110px; }
+      .gallery-back {
+        top: 10px;
+        left: 10px;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+      }
+      .gallery-close {
+        top: 8px;
+        right: 12px;
+        width: 34px;
+        height: 34px;
+        font-size: 2rem;
+      }
+      .lightbox-back {
+        top: 16px;
+        left: 16px;
+        font-size: 0.85rem;
+        padding: 0.45rem 0.9rem;
+      }
+      .lightbox-close {
+        top: 12px;
+        right: 18px;
+        font-size: 2.5rem;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div id="heart-container"></div>
@@ -357,16 +589,20 @@
     <!-- Carta -->
     <div class="letter-container">
       <p>Mi amor,</p>
-      <p>Hoy se cumple un año desde aquel 31 de octubre en el que, sin saberlo, empezamos a escribir la historia más bonita de mi vida. No fue un día cualquiera: fue el día en que mi mundo cambió de color para siempre.</p>
-      <p>Un año de risas que se quedan, de abrazos que curan, de mañanas contigo y de noches en las que hasta el silencio suena a nosotros. Un año en el que aprendí que el amor no se trata de grandes gestos, sino de esos pequeños momentos que se repiten y que nunca quiero que terminen.</p>
-      <p>Gracias por ser mi calma en los días difíciles, mi alegría en los días grises y mi persona favorita en todos los días. Gracias por elegirme, por quedarte y por hacer que hasta lo cotidiano se sienta como un regalo.</p>
-      <p><strong>Si pudiera volver a empezar, te elegiría mil veces más. Y si me preguntas qué quiero para el futuro, la respuesta siempre serás tú. Te amo, hoy y siempre.</strong></p>
+      <p>Hoy se cumple un año desde aquel 31 de octubre en el que, sin saberlo, empezamos a escribir nuestra historia
+         No fue un día cualquiera: fue el día en que mi mundo cambió de color para siempre.</p>
+      <p>Un año de risas que se quedan, de abrazos que curan, de mañanas contigo y de noches en las que hasta el
+        silencio suena a nosotros. Un año en el que aprendí que el amor no se trata de grandes gestos, sino de esos
+        pequeños momentos que se repiten y que nunca quiero que terminen.</p>
+      <p>Gracias por ser mi calma en los días difíciles, mi alegría en los días grises y mi persona favorita en todos
+        los días. Gracias por elegirme, por quedarte y por hacer que hasta lo cotidiano se sienta como un regalo.</p>
     </div>
 
     <!-- Botones -->
     <div class="btn-group">
       <button class="btn btn-primary" onclick="showSurprise()">Haz clic aquí 🎁</button>
       <button class="btn btn-secondary" onclick="rainLove()">Lluvia de amor 💕</button>
+      <button class="btn btn-secondary" onclick="openGallery()">Recuerdos 📸</button>
     </div>
 
     <div id="surprise" class="hidden-message">
@@ -375,12 +611,64 @@
 
     <!-- Frase rotativa -->
     <p id="lovePhrase" class="love-phrase"></p>
+
+    <!-- Modal de Galería -->
+    <div id="galleryModal" class="gallery-modal">
+      <div class="gallery-content">
+        <!-- ✅ Botón Volver (arriba izquierda) -->
+        <button class="gallery-back" onclick="closeGallery()">← Volver</button>
+        <!-- X de cerrar (arriba derecha) -->
+        <span class="gallery-close" onclick="closeGallery()">&times;</span>
+
+        <!-- ===== Categoría 1 ===== -->
+        <h3 class="gallery-category">Nuestra Primera Vez</h3>
+        <div class="gallery-grid">
+          <img src="img/1.jpg" alt="Recuerdo 1" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+1';">
+          <img src="img/2.jpg" alt="Recuerdo 2" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+2';">
+          <img src="img/3.jpg" alt="Recuerdo 3" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+3';">
+        </div>
+
+        <!-- ===== Categoría 2 ===== -->
+        <h3 class="gallery-category">Momentos Juntos</h3>
+        <div class="gallery-grid">
+          <img src="img/4.jpg" alt="Recuerdo 4" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+4';">
+          <img src="img/5.jpg" alt="Recuerdo 5" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+5';">
+          <img src="img/6.jpg" alt="Recuerdo 6" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+6';">
+        </div>
+
+        <!-- ===== Categoría 3 ===== -->
+        <h3 class="gallery-category">Nuestros Días Favoritos</h3>
+        <div class="gallery-grid">
+          <img src="img/7.jpg" alt="Recuerdo 7" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+7';">
+          <img src="img/8.jpg" alt="Recuerdo 8" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+8';">
+          <img src="img/9.jpg" alt="Recuerdo 9" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+9';">
+          <img src="img/10.jpg" alt="Recuerdo 10" class="gallery-img"
+               onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300/ffe5ec/e63956?text=Falta+foto+10';">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <button class="lightbox-back" onclick="closeLightbox()">← Volver al álbum</button>
+      <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+      <img id="lightboxImg" src="" alt="Foto ampliada">
+    </div>
   </div>
 
   <script>
     /* =====================================================
        1. FECHA DE INICIO: 31 de octubre de 2025
-       (mes 9 = octubre en JS, porque va de 0 a 11)
     ===================================================== */
     const startDate = new Date(2025, 9, 31, 0, 0, 0);
 
@@ -397,7 +685,7 @@
       if (prev[key] !== value) {
         el.innerText = value;
         el.classList.remove('tick');
-        void el.offsetWidth; // reinicia la animación
+        void el.offsetWidth;
         el.classList.add('tick');
         prev[key] = value;
       }
@@ -408,7 +696,7 @@
       const diff = now - startDate;
 
       if (diff < 0) {
-        ['days','hours','minutes','seconds'].forEach(k => els[k].innerText = 0);
+        ['days', 'hours', 'minutes', 'seconds'].forEach(k => els[k].innerText = 0);
         return;
       }
 
@@ -429,7 +717,7 @@
     /* =====================================================
        2. CORAZONES QUE SUBEN DESDE ABAJO
     ===================================================== */
-    const heartEmojis = ['❤️','💖','💕','💗','💓','💞','🌸','💘','💝'];
+    const heartEmojis = ['❤️', '💖', '💕', '💗', '💓', '💞', '🌸', '💘', '💝'];
 
     function createHeart() {
       const heart = document.createElement('div');
@@ -448,7 +736,7 @@
     /* =====================================================
        3. PÉTALOS QUE CAEN
     ===================================================== */
-    const petals = ['🌸','🌷','🌹','💮'];
+    const petals = ['🌸', '🌷', '🌹', '💮'];
     function createPetal() {
       const p = document.createElement('div');
       p.classList.add('petal');
@@ -462,11 +750,13 @@
     setInterval(createPetal, 1500);
 
     /* =====================================================
-       4. CHISPAS AL HACER CLIC EN CUALQUIER PARTE
+       4. CHISPAS AL HACER CLIC
     ===================================================== */
-    const clickSparks = ['💖','✨','💕','⭐','💗'];
+    const clickSparks = ['💖', '✨', '💕', '⭐', '💗'];
 
     document.addEventListener('click', (e) => {
+      if (e.target.closest('.gallery-content') || e.target.closest('.lightbox')) return;
+
       for (let i = 0; i < 6; i++) {
         const s = document.createElement('div');
         s.classList.add('spark');
@@ -483,7 +773,7 @@
     });
 
     /* =====================================================
-       5. BOTÓN SORPRESA CON CORAZÓN GIGANTE
+       5. BOTÓN SORPRESA
     ===================================================== */
     function showSurprise() {
       const msg = document.getElementById('surprise');
@@ -506,7 +796,7 @@
     }
 
     /* =====================================================
-       6. LLUVIA DE AMOR (botón secundario)
+       6. LLUVIA DE AMOR
     ===================================================== */
     function rainLove(count = 30) {
       for (let i = 0; i < count; i++) {
@@ -524,7 +814,7 @@
     }
 
     /* =====================================================
-       7. FRASES CARIÑOSAS ROTATIVAS
+       7. FRASES ROTATIVAS
     ===================================================== */
     const phrases = [
       'Eres mi lugar favorito en el mundo 🌍❤️',
@@ -551,6 +841,60 @@
 
     rotatePhrase();
     setInterval(rotatePhrase, 4000);
+
+    /* =====================================================
+       8. GALERÍA DE RECUERDOS
+    ===================================================== */
+    function openGallery() {
+      const modal = document.getElementById('galleryModal');
+      const content = modal.querySelector('.gallery-content');
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      // ✅ Forzar scroll al inicio del álbum
+      content.scrollTop = 0;
+    }
+
+    function closeGallery() {
+      document.getElementById('galleryModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // Cerrar al hacer clic en el fondo oscuro del modal
+    document.getElementById('galleryModal').addEventListener('click', function (e) {
+      if (e.target === this) closeGallery();
+    });
+
+    /* =====================================================
+       9. LIGHTBOX
+    ===================================================== */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    document.addEventListener('click', function (e) {
+      if (e.target.classList.contains('gallery-img')) {
+        lightboxImg.src = e.target.src;
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('show');
+      document.body.style.overflow = 'hidden'; // sigue abierto el álbum detrás
+    }
+
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        // Si el lightbox está abierto, ciérralo primero
+        if (lightbox.classList.contains('show')) {
+          lightbox.classList.remove('show');
+        } else {
+          closeGallery();
+        }
+      }
+    });
   </script>
 </body>
+
 </html>
